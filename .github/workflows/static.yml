@@ -35,10 +35,9 @@ jobs:
           script: |
             docker pull ghcr.io/${{ github.repository }}:latest
 
-            docker stop frontend || true
-            docker rm frontend || true
+            docker stop ${{ github.event.repository.name }} || true
+            docker rm ${{ github.event.repository.name }} || true
 
-            docker run -d \
-              --name frontend \
-              -p 8063:80 \
+            docker run -d --name ${{ github.event.repository.name }} \
+              -p 8063:8080 \
               ghcr.io/${{ github.repository }}:latest
