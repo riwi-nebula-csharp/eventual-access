@@ -39,5 +39,5 @@ jobs:
             docker rm ${{ github.event.repository.name }} || true
 
             docker run -d --name ${{ github.event.repository.name }} \
-              -p 8063:8080 \
+              -p 8063:80 \
               ghcr.io/${{ github.repository }}:latest
