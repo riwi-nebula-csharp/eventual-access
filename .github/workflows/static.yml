@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+
 permissions:
   contents: read
   packages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,15 +17,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Debug index
+        run: |
+          pwd
+          ls -lah
+          wc -c index.html
+          head -20 index.html
+
       - name: Login GHCR
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io \
+          -u ${{ github.actor }} \
+          --password-stdin
 
       - name: Build image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}:latest .
+          docker build --no-cache \
+            -t ghcr.io/${{ github.repository }}:${{ github.sha }} \
+            -t ghcr.io/${{ github.repository }}:latest \
+            .
 
       - name: Push image
         run: |
+          docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
           docker push ghcr.io/${{ github.repository }}:latest
 
       - name: Deploy VPS
@@ -33,11 +49,20 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull ghcr.io/${{ github.repository }}:latest
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io \
+              -u ${{ github.actor }} \
+              --password-stdin
 
             docker stop ${{ github.event.repository.name }} || true
             docker rm ${{ github.event.repository.name }} || true
+            docker image rm ghcr.io/${{ github.repository }}:latest || true
 
-            docker run -d --name ${{ github.event.repository.name }} \
+            docker pull ghcr.io/${{ github.repository }}:latest
+
+            docker run -d \
+              --name ${{ github.event.repository.name }} \
               -p 8063:80 \
               ghcr.io/${{ github.repository }}:latest
+
+            docker exec ${{ github.event.repository.name }} \
+              sh -c "wc -c /usr/share/nginx/html/index.html"
