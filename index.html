@@ -1,1 +1,233 @@
-<h1>hola mundo</h1>
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=Manrope:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#bfb2da",
+                    "surface-container-high": "#2b292f",
+                    "inverse-surface": "#e6e0e9",
+                    "primary-fixed-dim": "#cfbcff",
+                    "on-tertiary": "#3e2e00",
+                    "inverse-on-surface": "#322f35",
+                    "error": "#ffb4ab",
+                    "on-tertiary-container": "#503d00",
+                    "on-background": "#e6e0e9",
+                    "primary": "#cfbcff",
+                    "surface-container-low": "#1d1b20",
+                    "surface-dim": "#141218",
+                    "outline-variant": "#494551",
+                    "tertiary": "#e7c365",
+                    "surface": "#141218",
+                    "surface-bright": "#3b383e",
+                    "inverse-primary": "#6750a4",
+                    "background": "#141218",
+                    "on-secondary": "#342b4b",
+                    "primary-fixed": "#e9ddff",
+                    "on-surface": "#e6e0e9",
+                    "on-primary": "#381e72",
+                    "surface-container-highest": "#36343a",
+                    "secondary-container": "#4d4465",
+                    "primary-container": "#6750a4",
+                    "secondary-fixed": "#e9ddff",
+                    "secondary-fixed-dim": "#cdc0e9",
+                    "surface-variant": "#36343a",
+                    "on-primary-container": "#e0d2ff",
+                    "on-surface-variant": "#cbc4d2",
+                    "tertiary-fixed-dim": "#e7c365",
+                    "tertiary-container": "#c9a74d",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed-variant": "#594400",
+                    "on-primary-fixed": "#22005d",
+                    "secondary": "#cdc0e9",
+                    "surface-tint": "#cfbcff",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdf93",
+                    "error-container": "#93000a",
+                    "on-primary-fixed-variant": "#4f378a",
+                    "on-secondary-fixed-variant": "#4b4263",
+                    "on-tertiary-fixed": "#241a00",
+                    "outline": "#948e9c",
+                    "surface-container": "#211f24",
+                    "on-secondary-fixed": "#1f1635",
+                    "surface-container-lowest": "#0f0d13",
+                    "brand-burgundy": "#1D0F10",
+                    "brand-accent": "#8B1E3F",
+                    "brand-cream": "#F5F1E8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Manrope"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Manrope"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        
+        .theatrical-bg {
+            background-color: #1D0F10;
+            background-image: radial-gradient(circle at 50% -20%, #3a161d 0%, #1D0F10 70%);
+        }
+
+        .curtain-texture {
+            background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+        }
+
+        .glass-panel {
+            background: rgba(29, 15, 16, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 30, 63, 0.3);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8B1E3F !important;
+            box-shadow: 0 0 0 2px rgba(139, 30, 63, 0.2);
+        }
+
+        .btn-theatrical {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-theatrical::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-theatrical:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="theatrical-bg text-brand-cream font-body-md min-h-screen flex items-center justify-center p-gutter relative overflow-hidden">
+<!-- Atmospheric Background Effects -->
+<div class="fixed inset-0 curtain-texture pointer-events-none opacity-40"></div>
+<div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-accent/10 blur-[120px] rounded-full pointer-events-none"></div>
+<main class="w-full max-w-[440px] z-10">
+<!-- Logo Area -->
+<div class="flex flex-col items-center mb-12">
+<div class="mb-4 relative">
+<div class="absolute inset-0 bg-brand-accent blur-2xl opacity-20 scale-150"></div>
+<span class="material-symbols-outlined text-[64px] text-brand-accent relative" data-icon="theater_comedy">theater_comedy</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-brand-cream uppercase tracking-[0.2em] text-center mb-2">Teatro Eventual</h1>
+<div class="flex items-center gap-4 w-full">
+<div class="h-[1px] flex-grow bg-gradient-to-r from-transparent via-brand-accent to-transparent"></div>
+<span class="font-label-sm text-label-sm text-brand-accent tracking-[0.4em] uppercase">Tickets</span>
+<div class="h-[1px] flex-grow bg-gradient-to-r from-brand-accent via-brand-accent to-transparent"></div>
+</div>
+</div>
+<!-- Login Card -->
+<div class="glass-panel p-10 rounded-lg shadow-2xl relative">
+<!-- Subtle Lighting Corner -->
+<div class="absolute top-0 right-0 w-24 h-24 bg-brand-accent/5 blur-xl pointer-events-none"></div>
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-brand-cream mb-2">Bienvenido</h2>
+<p class="text-brand-cream/60 font-body-md">Acceda al sistema de gestión de boletería.</p>
+</div>
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-brand-accent uppercase tracking-wider block ml-1" for="username">Usuario</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-brand-accent/50 text-[20px]" data-icon="person">person</span>
+<input class="w-full bg-brand-burgundy/50 border border-brand-accent/30 text-brand-cream py-3.5 pl-12 pr-4 rounded-lg focus:ring-0 transition-all font-body-md placeholder:text-brand-cream/20" id="username" name="username" placeholder="ejemplo@gran-teatro.com" type="text">
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center ml-1">
+<label class="font-label-sm text-label-sm text-brand-accent uppercase tracking-wider block" for="password">Contraseña</label>
+<a class="text-[11px] font-label-sm text-brand-cream/40 hover:text-brand-accent transition-colors" href="#">¿Olvidó su clave?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-brand-accent/50 text-[20px]" data-icon="lock">lock</span>
+<input class="w-full bg-brand-burgundy/50 border border-brand-accent/30 text-brand-cream py-3.5 pl-12 pr-4 rounded-lg focus:ring-0 transition-all font-body-md placeholder:text-brand-cream/20" id="password" name="password" placeholder="••••••••••••" type="password">
+</div>
+</div>
+<div class="flex items-center gap-3 py-2">
+<input class="w-4 h-4 rounded border-brand-accent/40 bg-brand-burgundy text-brand-accent focus:ring-brand-accent/20 focus:ring-offset-brand-burgundy" id="remember" type="checkbox">
+<label class="font-body-md text-brand-cream/60 text-sm cursor-pointer select-none" for="remember">Recordar sesión en este equipo</label>
+</div>
+<button class="btn-theatrical w-full bg-brand-accent text-brand-cream font-headline-md py-4 rounded-lg shadow-lg shadow-brand-accent/20 flex items-center justify-center gap-2 group" type="submit">
+<span>INGRESAR AL SISTEMA</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 pt-8 border-t border-brand-accent/10 text-center">
+<p class="text-brand-cream/40 text-xs font-label-sm">
+                    SISTEMA DE USO EXCLUSIVO PARA PERSONAL AUTORIZADO
+                </p>
+</div>
+</div>
+<!-- Secondary Imagery / Visual Element -->
+<div class="mt-12 flex justify-center gap-8 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
+<img alt="Heritage Detail" class="w-12 h-12 rounded-full border border-brand-accent/30 object-cover" data-alt="A macro close-up shot of an ornate, gilded architectural detail inside a historic theater. The lighting is moody and dramatic, with deep crimson shadows and bright gold highlights. The visual style is classical and prestigious, reflecting a heritage of performing arts. The color palette is dominated by dark reds and rich metallic gold textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpNln4yl-Ke_Dy0Zc0KXaM3sXAzIJa99XbDAl2rSI37KxJLzlQAcVP3fQOU898H9xQgA5Qdz59dPbALNboT0e_MIuTLj3g689uJ_3gZqKozSaXwjI8zmO_jD37duKql9OGW28RBl5Xt0GxliiPqyjlIJse-k8IIASGlYYmffBwGBAK4CfrJu_x_d9c9gVumSCkKI9fi3jzET2ZldSRY7PkIASyX29K7XUnWc7vW9mBQqX5o4hNkI-mw5hH7q1tpEbDd7AYYj6kGVkM">
+<img alt="Stage View" class="w-12 h-12 rounded-full border border-brand-accent/30 object-cover" data-alt="A wide cinematic view of a grand empty theater stage from the perspective of the audience. The heavy velvet curtains are draped elegantly at the sides. Deep red tones fill the scene, accented by soft spotlighting that creates long shadows. The atmosphere is solemn, prestigious, and filled with quiet anticipation before a performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmeNiPa5FTbatpc5pPgi3eGFlpPZyAHZO2NpytGzxIWIsdNtUFBECZXklewwOY-8ExGlXgw-cZL7kmSL-K5KmKnQM3h4SDRwKNf2nE9SLr8P83EUakY6SzlqUx4rSTwRURtyWuL-2b00ZU4QEePlDrsSZwKYGGw0KrSmfKkT2x2DepBFVeDWD1QmLUhpicSnCjlzr488qoB2IS4rxRlD6dnSIhK5GxyPIrfHzOgBbXRGd4p0OwC6uJ6wc38F_k44YfMYIdczWNZmcK">
+<img alt="Ticket Detail" class="w-12 h-12 rounded-full border border-brand-accent/30 object-cover" data-alt="A highly detailed close-up of a vintage-style physical theater ticket resting on a dark velvet surface. The ticket features elegant serif typography and fine line-work patterns. The color palette consists of cream-colored parchment with deep wine-red ink accents. The lighting is soft and focused, emphasizing the tactile luxury and heritage of the object." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP6iGkcQ_l-bA8yV9m4hXvBD3NgWGhTpB3ElwvjXnmVcfBRaiKUEaOiZxMosjpPCLULwxjgmovSv3k4zHg58MVkkZ7_x-MNFxdCleh_qXCb7fzpuTOHiImmcuN3LuPr84kgycO8qIPTsHeWHTHcjAkdKNByI67XvXsn8_KMYAgdz-8SRSGDievqqQ6sr0dKfLbtpyZjpzZJzNnzEFJkS6STFny2hPB0ug7fjBMGzPCBjclhTvxHh8uwTxo6MkIV_cZl3IV7eAVeUk3">
+</div>
+<footer class="mt-12 text-center">
+<p class="font-label-sm text-brand-cream/30 uppercase tracking-widest text-[10px]">
+                © 2024 Gran Teatro • Departamento de Operaciones
+            </p>
+</footer>
+</main>
+<script>
+        // Simple micro-interaction for button and input focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').style.color = '#F5F1E8';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').style.color = 'rgba(139, 30, 63, 0.5)';
+            });
+        });
+
+        // Atmospheric mouse glow effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            const glow = document.createElement('div');
+            // Optimization: only occasionally spawn or use a persistent glow
+        });
+    </script>
+</body></html>
