@@ -1,0 +1,555 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gran Teatro - Panel de Validación</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-tint": "#cfbcff",
+          "primary-container": "#6750a4",
+          "on-primary-fixed": "#22005d",
+          "on-surface-variant": "#cbc4d2",
+          "on-primary": "#381e72",
+          "surface-bright": "#3b383e",
+          "surface-container-highest": "#36343a",
+          "surface-container-high": "#2b292f",
+          "on-tertiary-fixed-variant": "#594400",
+          "on-secondary": "#342b4b",
+          "tertiary-container": "#c9a74d",
+          "tertiary-fixed": "#ffdf93",
+          "error-container": "#93000a",
+          "secondary-container": "#4d4465",
+          "secondary-fixed": "#e9ddff",
+          "on-secondary-container": "#bfb2da",
+          "outline-variant": "#494551",
+          "on-tertiary-container": "#503d00",
+          "on-secondary-fixed": "#1f1635",
+          "outline": "#948e9c",
+          "on-surface": "#e6e0e9",
+          "tertiary": "#e7c365",
+          "inverse-surface": "#e6e0e9",
+          "surface-container-lowest": "#0f0d13",
+          "secondary-fixed-dim": "#cdc0e9",
+          "on-primary-container": "#e0d2ff",
+          "primary": "#cfbcff",
+          "on-tertiary": "#3e2e00",
+          "surface-container-low": "#1d1b20",
+          "surface": "#141218",
+          "surface-container": "#211f24",
+          "secondary": "#cdc0e9",
+          "on-secondary-fixed-variant": "#4b4263",
+          "inverse-primary": "#6750a4",
+          "on-primary-fixed-variant": "#4f378a",
+          "on-error": "#690005",
+          "primary-fixed-dim": "#cfbcff",
+          "error": "#ffb4ab",
+          "on-error-container": "#ffdad6",
+          "inverse-on-surface": "#322f35",
+          "primary-fixed": "#e9ddff",
+          "on-tertiary-fixed": "#241a00",
+          "surface-variant": "#36343a",
+          "surface-dim": "#141218",
+          "on-background": "#e6e0e9",
+          "background": "#141218",
+          "tertiary-fixed-dim": "#e7c365",
+          "theater-red": "#8B1E3F",
+          "theater-gold": "#e7c365"
+        },
+        borderRadius: {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        spacing: {
+          "base": "8px",
+          "margin-desktop": "40px",
+          "gutter": "24px",
+          "margin-mobile": "16px",
+          "container-max": "1280px"
+        },
+        fontFamily: {
+          "display-lg": ["Hanken Grotesk"],
+          "body-md": ["Manrope"],
+          "label-sm": ["JetBrains Mono"],
+          "headline-md": ["Hanken Grotesk"],
+          "body-lg": ["Manrope"]
+        },
+        fontSize: {
+          "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+          "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+          "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  @keyframes pulse-red {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+  }
+  .dot-pulse { animation: pulse-red 2s infinite ease-in-out; }
+  .fade-in-up { animation: fadeInUp 0.4s ease-out forwards; }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .scanner-border { box-shadow: 0 0 15px rgba(139, 30, 63, 0.4); }
+  .bg-glass {
+    backdrop-filter: blur(12px);
+    background: rgba(20, 18, 24, 0.8);
+  }
+  .hidden-section { display: none !important; }
+  .active-nav-item {
+    background-color: #8B1E3F !important;
+    color: #F5F1E8 !important;
+  }
+  .scanning-line { animation: scanLine 3s linear infinite; }
+  @keyframes scanLine {
+    0%   { top: 0; }
+    100% { top: 100%; }
+  }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+
+<!-- SideNavBar -->
+<aside class="w-[280px] h-full fixed left-0 top-0 bg-surface-container-high border-r border-outline-variant shadow-sm flex flex-col p-margin-mobile z-50">
+  <div class="mb-10 px-base">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-theater-gold text-[32px]" style="font-variation-settings: 'FILL' 1;">theater_comedy</span>
+      <div>
+        <h1 class="font-display-lg text-[20px] font-bold text-tertiary leading-tight">Gran Teatro</h1>
+        <p class="text-[10px] uppercase tracking-widest text-theater-red font-bold">Panel de Validación</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="flex-1 flex flex-col gap-base" id="main-nav">
+    <a class="nav-link rounded-lg flex items-center gap-4 p-4 transition-all duration-200 bg-theater-red text-white" data-section="section-scanner" href="#">
+      <span class="material-symbols-outlined">qr_code_scanner</span>
+      <span class="font-body-md">Escanear Ticket</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-validations" href="#">
+      <span class="material-symbols-outlined">fact_check</span>
+      <span class="font-body-md">Validaciones</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-tickets" href="#">
+      <span class="material-symbols-outlined">confirmation_number</span>
+      <span class="font-body-md">Entradas</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-history" href="#">
+      <span class="material-symbols-outlined">history</span>
+      <span class="font-body-md">Historial</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-settings" href="#">
+      <span class="material-symbols-outlined">settings</span>
+      <span class="font-body-md">Configuración</span>
+    </a>
+  </nav>
+
+  <div class="mt-auto border-t border-outline-variant pt-base">
+    <!-- ✅ Llama logout() de auth.js -->
+    <a class="text-on-surface-variant hover:text-error transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg cursor-pointer" id="btn-logout">
+      <span class="material-symbols-outlined">logout</span>
+      <span class="font-body-md">Cerrar sesión</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="ml-[280px] h-screen flex flex-col overflow-hidden">
+  <!-- TopAppBar -->
+  <header class="flex justify-between items-center px-margin-desktop h-20 bg-surface border-b border-outline-variant">
+    <div class="flex flex-col">
+      <h2 class="font-headline-md text-headline-md text-tertiary uppercase tracking-wide" id="page-title">ESCANEAR TICKET</h2>
+      <div class="w-16 h-1 bg-theater-red mt-1"></div>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="bg-surface-container px-4 py-2 rounded-full border border-outline-variant flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full dot-pulse bg-green-400" id="status-dot"></span>
+        <span class="text-sm font-medium" id="status-text">Conectado</span>
+      </div>
+      <!-- ✅ IDs para poblar desde auth.js -->
+      <div class="flex items-center gap-3 bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant">
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-theater-gold bg-surface-container-high flex items-center justify-center">
+          <img id="user-avatar" alt="Usuario" class="w-full h-full object-cover hidden">
+          <span id="user-avatar-fallback" class="material-symbols-outlined text-[20px] text-on-surface-variant">person</span>
+        </div>
+        <div class="flex flex-col pr-2">
+          <span class="text-xs font-bold leading-none" id="user-name">—</span>
+          <span class="text-[10px] text-on-surface-variant" id="user-email">—</span>
+        </div>
+        <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Sections Container -->
+  <div class="flex-1 overflow-hidden">
+
+    <!-- SECTION: ESCANEAR TICKET -->
+    <div class="content-section flex h-full p-margin-desktop gap-gutter bg-surface fade-in-up" id="section-scanner">
+      <section class="flex-[3] flex flex-col gap-6 fade-in-up">
+        <div class="flex-1 bg-surface-container-low rounded-xl border border-outline-variant relative flex flex-col items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#8B1E3F 1px, transparent 1px); background-size: 32px 32px;"></div>
+          <p class="font-body-lg text-on-surface-variant mb-12">Escanea el código QR del ticket</p>
+          <div class="relative p-10" id="qr-camera-view">
+            <div class="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-theater-red rounded-tl-lg"></div>
+            <div class="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-theater-red rounded-tr-lg"></div>
+            <div class="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-theater-red rounded-bl-lg"></div>
+            <div class="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-theater-red rounded-br-lg"></div>
+            <div class="bg-white/10 p-6 rounded-lg scanner-border relative group cursor-pointer overflow-hidden w-[300px] h-[300px] flex items-center justify-center bg-black/40" id="simulate-scan">
+              <span class="material-symbols-outlined text-[120px] text-on-surface-variant/20 absolute z-0">photo_camera</span>
+              <div class="relative z-10 w-full h-full flex flex-col items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                <img alt="QR Code" class="w-48 h-48 rounded shadow-2xl opacity-80 group-hover:opacity-100 transition-opacity" id="qr-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3-GshKMHSMGJ0L0lUde7jcFx_fmV6twStgigk3fBHbm17hUshMEZdOIZX1aXkOOTRCm8vc8Hult0kwRx4Z6w84vKOV8ZrYNWTqYd3fMlZ-yyxTjTpuM3nZS6zP9X_imj1qUMii4sSDO4jhDa4kgf2HsP8_ieLVqYRhyWaTtdG6nXaI7_pxhINT-amNST94D5arAgSP4V0UiucdEe0VIPwvKW3XPAtEjYlJhcj-bK0Eg0knB_fCadbHefxXzXwZatB1aF0PU4hgVHz">
+                <p class="text-[10px] mt-4 font-bold text-white/40 tracking-[0.2em] uppercase">Simular Captura</p>
+              </div>
+              <div class="absolute top-0 left-0 w-full h-1 bg-theater-red shadow-[0_0_15px_#8B1E3F] scanning-line z-20"></div>
+            </div>
+          </div>
+          <button class="mt-12 flex items-center gap-2 bg-surface-container-highest hover:bg-outline-variant px-6 py-3 rounded-full transition-all border border-outline-variant group" id="btn-flashlight">
+            <span class="material-symbols-outlined text-theater-gold transition-transform group-hover:rotate-12" id="flashlight-icon">flashlight_on</span>
+            <span class="font-medium text-on-surface" id="flashlight-text">Encender linterna</span>
+          </button>
+          <p class="mt-12 text-on-surface-variant text-sm flex items-center gap-2 italic">
+            <span class="material-symbols-outlined text-[18px]">info</span>
+            Alinea el código QR dentro del marco para escanear automáticamente
+          </p>
+        </div>
+      </section>
+
+      <section class="flex-[2] flex flex-col gap-6 fade-in-up">
+        <div class="h-full bg-surface-container-high rounded-xl border border-outline-variant p-8 flex flex-col" id="ticket-result-panel">
+          <h3 class="text-theater-red font-bold text-xs uppercase tracking-[0.2em] mb-8">Último Ticket Escaneado</h3>
+          <div class="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-4 opacity-60" id="scan-empty-state">
+            <span class="material-symbols-outlined text-[64px] text-on-surface-variant">qr_code_2</span>
+            <p class="font-body-lg">Esperando escaneo...</p>
+            <p class="text-sm text-on-surface-variant">Escanee una entrada para ver los detalles de validación aquí.</p>
+          </div>
+          <div class="hidden-section flex flex-col h-full" id="scan-details">
+            <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-4 flex items-center gap-4 mb-10">
+              <div class="bg-emerald-500 rounded-full w-10 h-10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-emerald-400 font-bold tracking-widest text-sm">VÁLIDO</span>
+                <span class="text-emerald-400/70 text-xs">Acceso permitido</span>
+              </div>
+            </div>
+            <div class="space-y-8 flex-1">
+              <div>
+                <h4 class="font-display-lg text-3xl font-bold mb-1" id="res-name">—</h4>
+                <p class="text-theater-gold font-body-lg" id="res-show">—</p>
+              </div>
+              <div class="grid gap-5">
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Fecha</p>
+                    <p class="font-medium" id="res-date">—</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">chair_alt</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Asiento</p>
+                    <p class="font-medium" id="res-seat">—</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">stars</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Tipo de Entrada</p>
+                    <p class="font-medium text-theater-gold" id="res-type">—</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">barcode</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Código</p>
+                    <p class="font-label-sm text-sm" id="res-code">—</p>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-outline-variant mt-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-on-surface-variant text-sm">schedule</span>
+                    <span class="text-xs text-on-surface-variant font-label-sm uppercase">
+                      Escaneado a las: <span class="text-on-surface" id="res-time">—</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 grid grid-cols-2 gap-4">
+              <button class="action-btn flex items-center justify-center gap-2 bg-surface-container-highest border border-outline-variant hover:border-theater-gold hover:text-theater-gold py-3 rounded-lg transition-all active:scale-95" data-action="print">
+                <span class="material-symbols-outlined text-sm">print</span>
+                <span class="text-sm font-semibold">Imprimir</span>
+              </button>
+              <button class="action-btn flex items-center justify-center gap-2 bg-surface-container-highest border border-outline-variant hover:border-theater-gold hover:text-theater-gold py-3 rounded-lg transition-all active:scale-95" data-action="email">
+                <span class="material-symbols-outlined text-sm">mail</span>
+                <span class="text-sm font-semibold">Correo</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECTION: VALIDACIONES -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface" id="section-validations">
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant p-8 h-full">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="font-headline-md text-2xl text-on-surface">Historial de Validaciones</h3>
+          <button class="bg-theater-red text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-800 transition-colors">Exportar Reporte</button>
+        </div>
+        <div class="overflow-auto max-h-[calc(100%-100px)]">
+          <table class="w-full text-left">
+            <thead class="border-b border-outline-variant">
+              <tr class="text-on-surface-variant text-xs uppercase tracking-widest font-bold">
+                <th class="pb-4">Ticket</th>
+                <th class="pb-4">Cliente</th>
+                <th class="pb-4">Hora</th>
+                <th class="pb-4">Estado</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/30 text-sm" id="validations-tbody">
+              <tr class="hover:bg-surface-container-high/50 transition-colors">
+                <td class="py-4">#TRT-4521</td>
+                <td class="py-4 font-bold">Roberto Carlos</td>
+                <td class="py-4">19:30:12</td>
+                <td class="py-4"><span class="text-emerald-500 font-bold">Válido</span></td>
+              </tr>
+              <tr class="hover:bg-surface-container-high/50 transition-colors">
+                <td class="py-4">#TRT-4520</td>
+                <td class="py-4 font-bold">Ana Martínez</td>
+                <td class="py-4">19:28:45</td>
+                <td class="py-4"><span class="text-emerald-500 font-bold">Válido</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: ENTRADAS -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface flex items-center justify-center" id="section-tickets">
+      <div class="text-center space-y-6 max-w-md">
+        <span class="material-symbols-outlined text-[80px] text-theater-gold">confirmation_number</span>
+        <h3 class="font-display-lg text-3xl font-bold">Gestión de Entradas</h3>
+        <p class="text-on-surface-variant">Panel de administración de boletería en tiempo real. Esta sección está en mantenimiento para sincronización de base de datos.</p>
+        <button class="bg-surface-container-highest border border-outline-variant px-8 py-3 rounded-full font-bold hover:border-theater-gold transition-colors">Volver al inicio</button>
+      </div>
+    </div>
+
+    <!-- SECTION: HISTORIAL -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface" id="section-history">
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant p-8">
+        <h3 class="font-headline-md text-2xl text-on-surface mb-8">Sesiones de Hoy</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-surface-container-high p-6 rounded-lg border border-outline-variant">
+            <p class="text-xs text-on-surface-variant uppercase font-bold mb-2">Tickets Totales</p>
+            <p class="text-4xl font-display-lg font-bold text-theater-gold">1,245</p>
+          </div>
+          <div class="bg-surface-container-high p-6 rounded-lg border border-outline-variant">
+            <p class="text-xs text-on-surface-variant uppercase font-bold mb-2">Acceso VIP</p>
+            <p class="text-4xl font-display-lg font-bold text-emerald-500">312</p>
+          </div>
+          <div class="bg-surface-container-high p-6 rounded-lg border border-outline-variant">
+            <p class="text-xs text-on-surface-variant uppercase font-bold mb-2">No Válidos</p>
+            <p class="text-4xl font-display-lg font-bold text-theater-red">14</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: CONFIGURACIÓN -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface" id="section-settings">
+      <div class="max-w-2xl bg-surface-container-low rounded-xl border border-outline-variant p-8">
+        <h3 class="font-headline-md text-2xl text-on-surface mb-8">Configuración del Terminal</h3>
+        <div class="space-y-6">
+          <div class="flex items-center justify-between p-4 bg-surface-container rounded-lg">
+            <div>
+              <p class="font-bold">Modo de Escaneo Automático</p>
+              <p class="text-sm text-on-surface-variant">Validar inmediatamente sin confirmación manual</p>
+            </div>
+            <div class="w-12 h-6 bg-theater-red rounded-full relative cursor-pointer">
+              <div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-4 bg-surface-container rounded-lg">
+            <div>
+              <p class="font-bold">Sonido de Notificación</p>
+              <p class="text-sm text-on-surface-variant">Emitir pitido tras validación exitosa</p>
+            </div>
+            <div class="w-12 h-6 bg-outline-variant rounded-full relative cursor-pointer">
+              <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ✅ auth.js va PRIMERO (expone logout, requireAuth, populateUserHeader) -->
+<script src="../auth.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // ── 1. Guardia de ruta ──────────────────────
+    const session = requireAuth();
+    if (!session) return; // redirige a login si no hay token
+
+    // ── 2. Poblar datos del usuario ─────────────
+    const { user } = session;
+    populateUserHeader(user);
+
+    // Mostrar avatar real si existe, si no mostrar ícono fallback
+    const avatar   = document.getElementById('user-avatar');
+    const fallback = document.getElementById('user-avatar-fallback');
+    if (user.avatar_url && avatar) {
+      avatar.classList.remove('hidden');
+      fallback.classList.add('hidden');
+    }
+
+    // ── 3. Logout ───────────────────────────────
+    document.getElementById('btn-logout')
+      .addEventListener('click', (e) => {
+        e.preventDefault();
+        logout(); // función de auth.js
+      });
+
+    // ── 4. SPA Navigation ───────────────────────
+    const navLinks  = document.querySelectorAll('.nav-link');
+    const sections  = document.querySelectorAll('.content-section');
+    const pageTitle = document.getElementById('page-title');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-section');
+
+        navLinks.forEach(nl => {
+          nl.classList.remove('active-nav-item');
+          nl.classList.add('text-on-surface-variant');
+        });
+        link.classList.add('active-nav-item');
+        link.classList.remove('text-on-surface-variant');
+
+        sections.forEach(s => {
+          s.classList.add('hidden-section');
+          s.classList.remove('fade-in-up');
+        });
+        const target = document.getElementById(targetId);
+        target.classList.remove('hidden-section');
+        target.classList.add('fade-in-up');
+
+        pageTitle.innerText = link.querySelector('span:last-child').innerText.toUpperCase();
+      });
+    });
+
+    // ── 5. Scanner simulado ─────────────────────
+    const scanTrigger  = document.getElementById('simulate-scan');
+    const emptyState   = document.getElementById('scan-empty-state');
+    const scanDetails  = document.getElementById('scan-details');
+    const validTbody   = document.getElementById('validations-tbody');
+
+    const scanData = [
+      { name: 'María González',   show: 'La Bella y la Bestia', code: 'TRT-2026-00012345', seat: 'Fila A · Asiento 5',    type: 'VIP' },
+      { name: 'Alejandro Sanz',   show: 'El Rey León',          code: 'TRT-2026-00098765', seat: 'Palco B · Asiento 12',  type: 'GENERAL' },
+      { name: 'Lucía Fernández',  show: 'Hamilton',             code: 'TRT-2026-00055443', seat: 'Fila C · Asiento 22',   type: 'PREMIUM' }
+    ];
+
+    scanTrigger.addEventListener('click', () => {
+      scanTrigger.classList.add('ring-4', 'ring-white', 'opacity-50');
+      setTimeout(() => {
+        scanTrigger.classList.remove('ring-4', 'ring-white', 'opacity-50');
+        showScanResult();
+      }, 300);
+    });
+
+    function showScanResult() {
+      const data = scanData[Math.floor(Math.random() * scanData.length)];
+      const now  = new Date();
+      const time = [now.getHours(), now.getMinutes(), now.getSeconds()]
+        .map(n => String(n).padStart(2, '0')).join(':');
+
+      document.getElementById('res-name').innerText = data.name;
+      document.getElementById('res-show').innerText = data.show;
+      document.getElementById('res-code').innerText = data.code;
+      document.getElementById('res-seat').innerText = data.seat;
+      document.getElementById('res-type').innerText = data.type;
+      document.getElementById('res-date').innerText = `24 May 2026 · 20:00`;
+      document.getElementById('res-time').innerText = time;
+
+      emptyState.classList.add('hidden-section');
+      scanDetails.classList.remove('hidden-section');
+      scanDetails.classList.add('fade-in-up');
+
+      // Agregar fila al historial de validaciones
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-surface-container-high/50 transition-colors fade-in-up';
+      tr.innerHTML = `
+        <td class="py-4">#${data.code.split('-').pop()}</td>
+        <td class="py-4 font-bold">${data.name}</td>
+        <td class="py-4">${time}</td>
+        <td class="py-4"><span class="text-emerald-500 font-bold">Válido</span></td>
+      `;
+      validTbody.prepend(tr);
+    }
+
+    // ── 6. Linterna ─────────────────────────────
+    const flashBtn  = document.getElementById('btn-flashlight');
+    const flashIcon = document.getElementById('flashlight-icon');
+    const flashText = document.getElementById('flashlight-text');
+    let flashOn = false;
+
+    flashBtn.addEventListener('click', () => {
+      flashOn = !flashOn;
+      flashBtn.classList.toggle('bg-theater-gold', flashOn);
+      flashIcon.innerText = flashOn ? 'flashlight_off' : 'flashlight_on';
+      flashText.innerText = flashOn ? 'Apagar linterna' : 'Encender linterna';
+      document.getElementById('qr-camera-view').classList.toggle('brightness-125', flashOn);
+    });
+
+    // ── 7. Botones de acción ─────────────────────
+    document.querySelectorAll('.action-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action');
+        btn.classList.add('scale-95');
+        setTimeout(() => btn.classList.remove('scale-95'), 100);
+        if (action === 'print') alert('Enviando a impresora de tickets...');
+        if (action === 'email') alert('Enviando comprobante digital al cliente...');
+      });
+    });
+
+    // ── 8. Pulso del status dot ──────────────────
+    setInterval(() => {
+      document.getElementById('status-dot').classList.toggle('bg-green-400');
+      document.getElementById('status-dot').classList.toggle('bg-green-500');
+    }, 1000);
+
+  });
+</script>
+
+</body></html>
