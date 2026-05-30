@@ -1,20 +1,20 @@
 // ─────────────────────────────────────────────
-//  auth.js  —  Portal de Acceso · Teatro Eventual
-//  Maneja login, sesión y guardia de ruta
+//  auth.js  —  Eventual Access · Panel de Validación
+//  Maneja login, forgot-password y sesión
 // ─────────────────────────────────────────────
 
 const AUTH_BASE_URL = 'https://service.auth.nebula.andrescortes.dev';
 
 const STORAGE_KEYS = {
-  TOKEN: 'access_token',
-  USER:  'access_user',
+  TOKEN: 'ea_token',
+  USER:  'ea_user',
 };
 
 // ── Helpers de sesión ──────────────────────────
 
 function saveSession(token, user) {
   localStorage.setItem(STORAGE_KEYS.TOKEN, token);
-  localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+  localStorage.setItem(STORAGE_KEYS.USER,  JSON.stringify(user));
 }
 
 function clearSession() {
@@ -26,26 +26,16 @@ function getToken() {
   return localStorage.getItem(STORAGE_KEYS.TOKEN);
 }
 
-function getUser() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEYS.USER));
-  } catch {
-    return null;
-  }
-}
-
-/** Decodifica el payload del JWT sin librerías externas */
 function decodeJwtPayload(token) {
   try {
-    const base64 = token.split('.')[1];
-    const decoded = atob(base64.replace(/-/g, '+').replace(/_/g, '/'));
+    const base64Payload = token.split('.')[1];
+    const decoded = atob(base64Payload.replace(/-/g, '+').replace(/_/g, '/'));
     return JSON.parse(decoded);
   } catch {
     return null;
   }
 }
 
-/** true si el token existe, es válido y no ha expirado */
 function isSessionValid() {
   const token = getToken();
   if (!token) return false;
@@ -54,21 +44,21 @@ function isSessionValid() {
   return payload.exp * 1000 > Date.now();
 }
 
-/** true si el usuario tiene permiso para este portal */
+// Si ya hay sesión activa ir directo al dashboard
+if (isSessionValid()) {
+  window.location.href = 'public/dashboard.html';
+}
+
+// ── Validación de rol/permiso ──────────────────
+// Solo admin o employee con permiso "access"
+
 function hasAccessPermission(user) {
   if (!user) return false;
   if (user.role === 'admin') return true;
-  if (user.role === 'employee') {
-    const perms = user.permissions ?? [];
-    return perms.includes('access');
+  if (user.role === 'employee' && Array.isArray(user.permissions)) {
+    return user.permissions.includes('access');
   }
   return false;
-}
-
-// Redirigir al dashboard si ya hay sesión activa
-if (isSessionValid() && document.getElementById('login-form') !== null || isSessionValid() && document.readyState === 'loading') {
-  // Se evalúa cuando el script carga; la redirección real
-  // la hace el DOMContentLoaded para no correr antes del DOM
 }
 
 // ── UI Helpers ─────────────────────────────────
@@ -82,7 +72,7 @@ function setButtonLoading(btn, isLoading) {
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
-      <span>Autenticando...</span>`;
+      <span>VALIDANDO...</span>`;
   } else {
     btn.disabled = false;
     btn.innerHTML = btn.dataset.originalHtml || btn.innerHTML;
@@ -92,22 +82,15 @@ function setButtonLoading(btn, isLoading) {
 function setButtonSuccess(btn) {
   btn.innerHTML = `
     <span class="material-symbols-outlined">check_circle</span>
-    <span>Acceso Concedido</span>`;
-  btn.style.background = '#16a34a'; // green-600
-}
-
-function setButtonError(btn) {
-  btn.disabled = false;
-  btn.innerHTML = btn.dataset.originalHtml || btn.innerHTML;
-  btn.style.background = '';
+    <span>ACCESO CONCEDIDO</span>`;
+  btn.classList.remove('bg-brand-accent');
+  btn.classList.add('!bg-green-600');
 }
 
 function showError(message) {
   const el = document.getElementById('login-error');
   if (!el) return;
-  // El span de texto es el segundo hijo (después del ícono)
-  const textSpan = el.querySelector('span:last-child');
-  if (textSpan) textSpan.textContent = message;
+  el.textContent = message;
   el.classList.remove('hidden');
   clearTimeout(el._hideTimeout);
   el._hideTimeout = setTimeout(() => el.classList.add('hidden'), 6000);
@@ -117,21 +100,12 @@ function hideError() {
   document.getElementById('login-error')?.classList.add('hidden');
 }
 
-function showFieldError(fieldId, message) {
-  const el = document.getElementById(`${fieldId}-error`);
+function showForgotSuccess(message) {
+  const el = document.getElementById('forgot-success');
   if (el) {
     el.textContent = message;
     el.classList.remove('hidden');
   }
-}
-
-function clearFieldErrors() {
-  document.querySelectorAll('[id$="-error"]').forEach(el => {
-    if (el.id !== 'login-error') {
-      el.textContent = '';
-      el.classList.add('hidden');
-    }
-  });
 }
 
 // ── API Calls ──────────────────────────────────
@@ -145,21 +119,19 @@ async function apiLogin(email, password) {
     },
     body: JSON.stringify({ email, password }),
   });
-  return { status: res.status, data: await res.json() };
+  return res.json();
 }
 
-async function apiLogout(token) {
-  try {
-    await fetch(`${AUTH_BASE_URL}/api/auth/logout`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-      },
-    });
-  } catch {
-    // Stateless: limpiar local aunque falle la red
-  }
+async function apiForgotPassword(email) {
+  const res = await fetch(`${AUTH_BASE_URL}/api/auth/password/forgot`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  });
+  return res.json();
 }
 
 // ── Handlers ───────────────────────────────────
@@ -167,131 +139,109 @@ async function apiLogout(token) {
 async function handleLogin(e) {
   e.preventDefault();
   hideError();
-  clearFieldErrors();
 
-  const email    = document.getElementById('email').value.trim();
+  const email    = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value;
-  const btn      = e.target.querySelector('button[type="submit"]');
-
-  // Validación local
-  let hasErrors = false;
-  if (!email) {
-    showFieldError('email', 'El correo es requerido.');
-    hasErrors = true;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showFieldError('email', 'Ingresa un correo válido.');
-    hasErrors = true;
-  }
-  if (!password) {
-    showFieldError('password', 'La contraseña es requerida.');
-    hasErrors = true;
-  }
-  if (hasErrors) return;
+  const btn      = document.getElementById('login-btn');
 
   setButtonLoading(btn, true);
 
   try {
-    const { status, data } = await apiLogin(email, password);
+    const data = await apiLogin(email, password);
 
     if (data.success) {
-      const { token, user } = data.data;
+      const user = data.data.user;
+      const tokenPayload = decodeJwtPayload(data.data.token);
+      user.permissions = tokenPayload?.permissions || [];
 
-      // Verificar permiso para este portal
       if (!hasAccessPermission(user)) {
-        setButtonError(btn);
-        showError('No tienes permiso para acceder a este portal.');
+        setButtonLoading(btn, false);
+        showError('Tu cuenta no tiene acceso al Panel de Validación.');
         return;
       }
 
-      saveSession(token, user);
+      saveSession(data.data.token, user);
       setButtonSuccess(btn);
 
       setTimeout(() => {
         window.location.href = 'public/dashboard.html';
       }, 700);
 
-    } else if (status === 422 && data.errors) {
-      setButtonError(btn);
-      for (const [field, messages] of Object.entries(data.errors)) {
-        showFieldError(field, messages[0]);
-      }
-
     } else {
-      setButtonError(btn);
+      setButtonLoading(btn, false);
       showError(data.message || 'Credenciales inválidas.');
     }
-
   } catch (err) {
-    setButtonError(btn);
+    setButtonLoading(btn, false);
     showError('No se pudo conectar con el servidor. Intenta de nuevo.');
     console.error('[auth] login error:', err);
   }
 }
 
-// ── Logout (llamado desde el dashboard) ────────
+async function handleForgotPassword(e) {
+  e.preventDefault();
 
-async function logout() {
-  const token = getToken();
-  if (token) await apiLogout(token);
-  clearSession();
-  window.location.href = '../index.html';
-}
+  const email = document.getElementById('forgot-email').value.trim();
+  const btn   = e.target.querySelector('button[type="submit"]');
 
-// ── Guardia de ruta (llamado desde el dashboard) 
+  setButtonLoading(btn, true);
 
-function requireAuth() {
-  if (!isSessionValid()) {
-    clearSession();
-    window.location.href = '../index.html';
-    return null;
-  }
-  return { token: getToken(), user: getUser() };
-}
-
-// ── Poblar header del dashboard ────────────────
-
-function populateUserHeader(user) {
-  const nameEl    = document.getElementById('user-name');
-  const emailEl   = document.getElementById('user-email');
-  const avatarEl  = document.getElementById('user-avatar');
-  const fallback  = document.getElementById('user-avatar-fallback');
-
-  if (nameEl)  nameEl.textContent  = user.name;
-  if (emailEl) emailEl.textContent = user.email;
-
-  if (avatarEl && user.avatar_url) {
-    avatarEl.src = user.avatar_url;
-    avatarEl.alt = user.name;
-    avatarEl.classList.remove('hidden');
-    fallback?.classList.add('hidden');
+  try {
+    const data = await apiForgotPassword(email);
+    showForgotSuccess(data.message || 'Si el correo existe recibirás un enlace de recuperación.');
+  } catch {
+    showForgotSuccess('Si el correo existe recibirás un enlace de recuperación.');
+  } finally {
+    setButtonLoading(btn, false);
   }
 }
 
-// ── Init ───────────────────────────────────────
+function togglePasswordVisibility() {
+  const input = document.getElementById('password');
+  const icon  = document.getElementById('toggle-password').querySelector('.material-symbols-outlined');
+  if (!input) return;
+  if (input.type === 'password') {
+    input.type = 'text';
+    if (icon) icon.textContent = 'visibility_off';
+  } else {
+    input.type = 'password';
+    if (icon) icon.textContent = 'visibility';
+  }
+}
+
+function openForgotModal() {
+  const modal = document.getElementById('modal-forgot');
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.getElementById('forgot-success')?.classList.add('hidden');
+    document.getElementById('forgot-email').value = '';
+  }
+}
+
+function closeForgotModal() {
+  document.getElementById('modal-forgot')?.classList.add('hidden');
+}
+
+// ── Event Listeners ────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Si ya hay sesión válida y estamos en el login, redirigir
-  if (isSessionValid() && document.getElementById('login-form')) {
-    window.location.href = 'public/dashboard.html';
-    return;
-  }
-
   document.getElementById('login-form')
     ?.addEventListener('submit', handleLogin);
 
-  // Limpiar error de campo al escribir
-  ['email', 'password'].forEach(id => {
-    document.getElementById(id)?.addEventListener('input', () => {
-      document.getElementById(`${id}-error`)?.classList.add('hidden');
-    });
-  });
+  document.getElementById('toggle-password')
+    ?.addEventListener('click', togglePasswordVisibility);
 
-  // Micro-interacción: ícono del input al hacer focus
-  ['email', 'password'].forEach(id => {
-    const input = document.getElementById(id);
-    const icon  = document.getElementById(`icon-${id}`);
-    if (!input || !icon) return;
-    input.addEventListener('focus', () => { icon.style.color = '#F5F1E8'; });
-    input.addEventListener('blur',  () => { icon.style.color = 'rgba(139, 30, 63, 0.5)'; });
-  });
+  document.getElementById('forgot-link')
+    ?.addEventListener('click', (e) => { e.preventDefault(); openForgotModal(); });
+
+  document.getElementById('forgot-password-form')
+    ?.addEventListener('submit', handleForgotPassword);
+
+  document.getElementById('forgot-modal-close')
+    ?.addEventListener('click', closeForgotModal);
+
+  document.getElementById('modal-forgot')
+    ?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeForgotModal();
+    });
 });
