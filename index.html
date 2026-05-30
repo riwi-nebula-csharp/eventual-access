@@ -1,258 +1,383 @@
 <!DOCTYPE html><html class="dark" lang="es"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gran Teatro - Panel de Validación</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=Manrope:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-secondary-container": "#bfb2da",
-                    "surface-container-high": "#2b292f",
-                    "inverse-surface": "#e6e0e9",
-                    "primary-fixed-dim": "#cfbcff",
-                    "on-tertiary": "#3e2e00",
-                    "inverse-on-surface": "#322f35",
-                    "error": "#ffb4ab",
-                    "on-tertiary-container": "#503d00",
-                    "on-background": "#e6e0e9",
-                    "primary": "#cfbcff",
-                    "surface-container-low": "#1d1b20",
-                    "surface-dim": "#141218",
-                    "outline-variant": "#494551",
-                    "tertiary": "#e7c365",
-                    "surface": "#141218",
-                    "surface-bright": "#3b383e",
-                    "inverse-primary": "#6750a4",
-                    "background": "#141218",
-                    "on-secondary": "#342b4b",
-                    "primary-fixed": "#e9ddff",
-                    "on-surface": "#e6e0e9",
-                    "on-primary": "#381e72",
-                    "surface-container-highest": "#36343a",
-                    "secondary-container": "#4d4465",
-                    "primary-container": "#6750a4",
-                    "secondary-fixed": "#e9ddff",
-                    "secondary-fixed-dim": "#cdc0e9",
-                    "surface-variant": "#36343a",
-                    "on-primary-container": "#e0d2ff",
-                    "on-surface-variant": "#cbc4d2",
-                    "tertiary-fixed-dim": "#e7c365",
-                    "tertiary-container": "#c9a74d",
-                    "on-error": "#690005",
-                    "on-tertiary-fixed-variant": "#594400",
-                    "on-primary-fixed": "#22005d",
-                    "secondary": "#cdc0e9",
-                    "surface-tint": "#cfbcff",
-                    "on-error-container": "#ffdad6",
-                    "tertiary-fixed": "#ffdf93",
-                    "error-container": "#93000a",
-                    "on-primary-fixed-variant": "#4f378a",
-                    "on-secondary-fixed-variant": "#4b4263",
-                    "on-tertiary-fixed": "#241a00",
-                    "outline": "#948e9c",
-                    "surface-container": "#211f24",
-                    "on-secondary-fixed": "#1f1635",
-                    "surface-container-lowest": "#0f0d13",
-                    "brand-burgundy": "#1D0F10",
-                    "brand-accent": "#8B1E3F",
-                    "brand-cream": "#F5F1E8"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "spacing": {
-                    "base": "8px",
-                    "gutter": "24px",
-                    "container-max": "1280px",
-                    "margin-mobile": "16px",
-                    "margin-desktop": "40px"
-            },
-            "fontFamily": {
-                    "body-lg": ["Manrope"],
-                    "label-sm": ["JetBrains Mono"],
-                    "headline-md": ["Hanken Grotesk"],
-                    "body-md": ["Manrope"],
-                    "display-lg": ["Hanken Grotesk"]
-            },
-            "fontSize": {
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
-            }
-          },
-        },
-      }
-    </script>
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: {
+      "surface-tint":"#cfbcff","primary-container":"#6750a4","on-primary-fixed":"#22005d",
+      "on-surface-variant":"#cbc4d2","on-primary":"#381e72","surface-bright":"#3b383e",
+      "surface-container-highest":"#36343a","surface-container-high":"#2b292f",
+      "on-secondary":"#342b4b","tertiary-container":"#c9a74d","tertiary-fixed":"#ffdf93",
+      "error-container":"#93000a","secondary-container":"#4d4465","secondary-fixed":"#e9ddff",
+      "on-secondary-container":"#bfb2da","outline-variant":"#494551","on-tertiary-container":"#503d00",
+      "outline":"#948e9c","on-surface":"#e6e0e9","tertiary":"#e7c365","inverse-surface":"#e6e0e9",
+      "surface-container-lowest":"#0f0d13","on-primary-container":"#e0d2ff","primary":"#cfbcff",
+      "on-tertiary":"#3e2e00","surface-container-low":"#1d1b20","surface":"#141218",
+      "surface-container":"#211f24","secondary":"#cdc0e9","inverse-primary":"#6750a4",
+      "on-error":"#690005","error":"#ffb4ab","on-error-container":"#ffdad6",
+      "inverse-on-surface":"#322f35","surface-variant":"#36343a","surface-dim":"#141218",
+      "on-background":"#e6e0e9","background":"#141218","tertiary-fixed-dim":"#e7c365",
+      "theater-red":"#8B1E3F","theater-gold":"#e7c365"
+    },
+    borderRadius: { DEFAULT:"0.125rem", lg:"0.25rem", xl:"0.5rem", full:"0.75rem" },
+    spacing: { base:"8px", "margin-desktop":"40px", gutter:"24px", "margin-mobile":"16px" },
+    fontFamily: {
+      "display-lg":["Hanken Grotesk"],"body-md":["Manrope"],"label-sm":["JetBrains Mono"],
+      "headline-md":["Hanken Grotesk"],"body-lg":["Manrope"]
+    },
+    fontSize: {
+      "display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],
+      "body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],
+      "label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],
+      "headline-md":["32px",{"lineHeight":"40px","fontWeight":"600"}],
+      "body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]
+    }
+  }}
+}
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        
-        .theatrical-bg {
-            background-color: #1D0F10;
-            background-image: radial-gradient(circle at 50% -20%, #3a161d 0%, #1D0F10 70%);
-        }
-
-        .curtain-texture {
-            background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
-        }
-
-        .glass-panel {
-            background: rgba(29, 15, 16, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(139, 30, 63, 0.3);
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #8B1E3F !important;
-            box-shadow: 0 0 0 2px rgba(139, 30, 63, 0.2);
-        }
-
-        .btn-theatrical {
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-theatrical::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-theatrical:hover::after {
-            left: 100%;
-        }
-    </style>
+  @keyframes pulse-red { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.2);opacity:.6} }
+  .dot-pulse { animation: pulse-red 2s infinite ease-in-out; }
+  .fade-in-up { animation: fadeInUp .4s ease-out forwards; }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .scanner-border { box-shadow: 0 0 15px rgba(139,30,63,.4); }
+  .hidden-section { display: none !important; }
+  .active-nav-item { background-color:#6750a4 !important; color:#e0d2ff !important; }
+  .scanning-line { animation: scanLine 3s linear infinite; }
+  @keyframes scanLine { 0%{top:0} 100%{top:100%} }
+</style>
 </head>
-<body class="theatrical-bg text-brand-cream font-body-md min-h-screen flex items-center justify-center p-gutter relative overflow-hidden">
-<!-- Atmospheric Background Effects -->
-<div class="fixed inset-0 curtain-texture pointer-events-none opacity-40"></div>
-<div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-accent/10 blur-[120px] rounded-full pointer-events-none"></div>
-<main class="w-full max-w-[440px] z-10">
-<!-- Logo Area -->
-<div class="flex flex-col items-center mb-12">
-<div class="mb-4 relative">
-<div class="absolute inset-0 bg-brand-accent blur-2xl opacity-20 scale-150"></div>
-<span class="material-symbols-outlined text-[64px] text-brand-accent relative" data-icon="theater_comedy">theater_comedy</span>
-</div>
-<h1 class="font-display-lg text-display-lg text-brand-cream uppercase tracking-[0.2em] text-center mb-2">Teatro Eventual</h1>
-<div class="flex items-center gap-4 w-full">
-<div class="h-[1px] flex-grow bg-gradient-to-r from-transparent via-brand-accent to-transparent"></div>
-<span class="font-label-sm text-label-sm text-brand-accent tracking-[0.4em] uppercase">Tickets</span>
-<div class="h-[1px] flex-grow bg-gradient-to-r from-brand-accent via-brand-accent to-transparent"></div>
-</div>
-</div>
-<!-- Login Card -->
-<div class="glass-panel p-10 rounded-lg shadow-2xl relative">
-<!-- Subtle Lighting Corner -->
-<div class="absolute top-0 right-0 w-24 h-24 bg-brand-accent/5 blur-xl pointer-events-none"></div>
-<div class="mb-8">
-<h2 class="font-headline-md text-headline-md text-brand-cream mb-2">Bienvenido</h2>
-<p class="text-brand-cream/60 font-body-md">Acceda al sistema de gestión de boletería.</p>
-</div>
-<form class="space-y-6" id="login-form">
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-brand-accent uppercase tracking-wider block ml-1" for="username">Usuario</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-brand-accent/50 text-[20px]" data-icon="person">person</span>
-<input class="w-full bg-brand-burgundy/50 border border-brand-accent/30 text-brand-cream py-3.5 pl-12 pr-4 rounded-lg focus:ring-0 transition-all font-body-md placeholder:text-brand-cream/20" id="username" name="username" placeholder="ejemplo@gran-teatro.com" type="text">
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between items-center ml-1">
-<label class="font-label-sm text-label-sm text-brand-accent uppercase tracking-wider block" for="password">Contraseña</label>
-<a class="text-[11px] font-label-sm text-brand-cream/40 hover:text-brand-accent transition-colors" href="#" id="forgot-link">¿Olvidó su clave?</a>
-</div>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-brand-accent/50 text-[20px]" data-icon="lock">lock</span>
-<input class="w-full bg-brand-burgundy/50 border border-brand-accent/30 text-brand-cream py-3.5 pl-12 pr-10 rounded-lg focus:ring-0 transition-all font-body-md placeholder:text-brand-cream/20" id="password" name="password" placeholder="••••••••••••" type="password">
-<button type="button" id="toggle-password" class="absolute right-4 top-1/2 -translate-y-1/2 text-brand-accent/50 hover:text-brand-accent transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
-</div>
-</div>
-<div class="flex items-center gap-3 py-2">
-<input class="w-4 h-4 rounded border-brand-accent/40 bg-brand-burgundy text-brand-accent focus:ring-brand-accent/20 focus:ring-offset-brand-burgundy" id="remember" type="checkbox">
-<label class="font-body-md text-brand-cream/60 text-sm cursor-pointer select-none" for="remember">Recordar sesión en este equipo</label>
-</div>
-<button class="btn-theatrical w-full bg-brand-accent text-brand-cream font-headline-md py-4 rounded-lg shadow-lg shadow-brand-accent/20 flex items-center justify-center gap-2 group" id="login-btn" type="submit">
-<span>INGRESAR AL SISTEMA</span>
-<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</form>
-<div class="mt-8 pt-8 border-t border-brand-accent/10 text-center">
-<p class="text-brand-cream/40 text-xs font-label-sm">
-                    SISTEMA DE USO EXCLUSIVO PARA PERSONAL AUTORIZADO
-                </p>
-</div>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
 
-<footer class="mt-12 text-center">
-<p class="font-label-sm text-brand-cream/30 uppercase tracking-widest text-[10px]">
-                © 2024 Gran Teatro • Departamento de Operaciones
-            </p>
-</footer>
-</main>
-<script>
-        // Simple micro-interaction for button and input focus
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.querySelector('.material-symbols-outlined').style.color = '#F5F1E8';
-            });
-            input.addEventListener('blur', () => {
-                input.parentElement.querySelector('.material-symbols-outlined').style.color = 'rgba(139, 30, 63, 0.5)';
-            });
-        });
-
-        // Atmospheric mouse glow effect
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            const glow = document.createElement('div');
-            // Optimization: only occasionally spawn or use a persistent glow
-        });
-    </script>
-
-<!-- Error Alert -->
-<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden max-w-sm w-full mx-4 rounded-lg border border-red-500/30 bg-brand-burgundy px-5 py-4 text-brand-cream font-body-md text-sm text-center shadow-xl" id="login-error"></div>
-
-<!-- Modal: Forgot Password -->
-<div class="fixed inset-0 z-[200] flex items-center justify-center hidden" id="modal-forgot">
-  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-  <div class="relative bg-surface-container w-full max-w-sm rounded-xl border border-outline-variant shadow-2xl p-8 mx-4">
-    <button class="absolute top-4 right-4 text-on-surface-variant hover:text-brand-accent transition-colors" id="forgot-modal-close">
-      <span class="material-symbols-outlined">close</span>
-    </button>
-    <div class="flex items-center gap-3 mb-6">
-      <span class="material-symbols-outlined text-theater-gold">lock_reset</span>
-      <h3 class="font-headline-md text-on-surface text-xl">Recuperar Contrasena</h3>
-    </div>
-    <p class="text-on-surface-variant font-body-md text-sm mb-6">Ingresa tu correo y recibirás un enlace para restablecer tu contraseña.</p>
-    <form class="space-y-4" id="forgot-password-form">
+<!-- SideNavBar -->
+<aside class="w-[280px] h-full fixed left-0 top-0 bg-surface-container-high border-r border-outline-variant shadow-sm flex flex-col p-margin-mobile z-50">
+  <div class="mb-10 px-base">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-theater-gold text-[32px]" style="font-variation-settings:'FILL' 1;">theater_comedy</span>
       <div>
-        <label class="font-label-sm text-label-sm text-theater-gold uppercase block mb-2" for="forgot-email">Correo electronico</label>
-        <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-3 px-4 text-on-surface font-body-md focus:border-theater-gold outline-none transition-all" id="forgot-email" placeholder="validador@gran-teatro.com" required type="email">
+        <h1 class="font-display-lg text-[20px] font-bold text-tertiary leading-tight">Gran Teatro</h1>
+        <p class="text-[10px] uppercase tracking-widest text-theater-red font-bold">Panel de Validación</p>
       </div>
-      <div class="hidden rounded-lg border border-theater-gold/30 bg-theater-gold/10 px-4 py-3 text-theater-gold font-body-md text-sm text-center" id="forgot-success"></div>
-      <button class="w-full bg-theater-red text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 hover:brightness-110 transition-all" type="submit">
-        <span>Enviar enlace</span>
-        <span class="material-symbols-outlined text-[18px]">send</span>
-      </button>
-    </form>
+    </div>
   </div>
-</div>
-<script src="js/auth.js"></script>
+  <nav class="flex-1 flex flex-col gap-base" id="main-nav">
+    <a class="nav-link rounded-lg flex items-center gap-4 p-4 transition-all duration-200 bg-theater-red text-white" data-section="section-scanner" href="#">
+      <span class="material-symbols-outlined">qr_code_scanner</span>
+      <span class="font-body-md">Escanear Ticket</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-validations" href="#">
+      <span class="material-symbols-outlined">fact_check</span>
+      <span class="font-body-md">Validaciones</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-tickets" href="#">
+      <span class="material-symbols-outlined">confirmation_number</span>
+      <span class="font-body-md">Entradas</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-history" href="#">
+      <span class="material-symbols-outlined">history</span>
+      <span class="font-body-md">Historial</span>
+    </a>
+    <a class="nav-link text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" data-section="section-settings" href="#">
+      <span class="material-symbols-outlined">settings</span>
+      <span class="font-body-md">Configuración</span>
+    </a>
+  </nav>
+  <div class="mt-auto border-t border-outline-variant pt-base">
+    <a class="text-on-surface-variant hover:text-error transition-colors duration-200 flex items-center gap-4 p-4 rounded-lg" href="#" id="logout-btn">
+      <span class="material-symbols-outlined">logout</span>
+      <span class="font-body-md">Cerrar sesión</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="ml-[280px] h-screen flex flex-col overflow-hidden">
+  <!-- TopAppBar -->
+  <header class="flex justify-between items-center px-margin-desktop h-20 bg-surface border-b border-outline-variant">
+    <div class="flex flex-col">
+      <h2 class="font-headline-md text-headline-md text-tertiary uppercase tracking-wide" id="page-title">ESCANEAR TICKET</h2>
+      <div class="w-16 h-1 bg-theater-red mt-1"></div>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="bg-surface-container px-4 py-2 rounded-full border border-outline-variant flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full dot-pulse bg-green-400" id="status-dot"></span>
+        <span class="text-sm font-medium" id="status-text">Conectado</span>
+      </div>
+      <!-- User info -->
+      <div class="flex items-center gap-3 bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant">
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-theater-gold bg-theater-red flex items-center justify-center">
+          <img alt="Avatar" class="w-full h-full object-cover" id="user-avatar" src="">
+        </div>
+        <div class="flex flex-col pr-2">
+          <span class="text-xs font-bold leading-none" id="user-name-display">—</span>
+          <span class="text-[10px] text-on-surface-variant" id="user-email-display">—</span>
+        </div>
+        <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Sections -->
+  <div class="flex-1 overflow-hidden">
+
+    <!-- SECTION: ESCANEAR TICKET -->
+    <div class="content-section flex h-full p-margin-desktop gap-gutter bg-surface fade-in-up" id="section-scanner">
+      <section class="flex-[3] flex flex-col gap-6 fade-in-up">
+        <div class="flex-1 bg-surface-container-low rounded-xl border border-outline-variant relative flex flex-col items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image:radial-gradient(#8B1E3F 1px,transparent 1px);background-size:32px 32px;"></div>
+          <p class="font-body-lg text-on-surface-variant mb-12">Escanea el código QR del ticket</p>
+          <div class="relative p-10" id="qr-camera-view">
+            <div class="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-theater-red rounded-tl-lg"></div>
+            <div class="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-theater-red rounded-tr-lg"></div>
+            <div class="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-theater-red rounded-bl-lg"></div>
+            <div class="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-theater-red rounded-br-lg"></div>
+            <div class="bg-white/10 p-6 rounded-lg scanner-border relative group cursor-pointer overflow-hidden w-[300px] h-[300px] flex items-center justify-center bg-black/40" id="simulate-scan">
+              <span class="material-symbols-outlined text-[120px] text-on-surface-variant/20 absolute z-0">photo_camera</span>
+              <div class="relative z-10 w-full h-full flex flex-col items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                <img alt="QR Code" class="w-48 h-48 rounded shadow-2xl opacity-80 group-hover:opacity-100 transition-opacity" id="qr-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3-GshKMHSMGJ0L0lUde7jcFx_fmV6twStgigk3fBHbm17hUshMEZdOIZX1aXkOOTRCm8vc8Hult0kwRx4Z6w84vKOV8ZrYNWTqYd3fMlZ-yyxTjTpuM3nZS6zP9X_imj1qUMii4sSDO4jhDa4kgf2HsP8_ieLVqYRhyWaTtdG6nXaI7_pxhINT-amNST94D5arAgSP4V0UiucdEe0VIPwvKW3XPAtEjYlJhcj-bK0Eg0knB_fCadbHefxXzXwZatB1aF0PU4hgVHz">
+                <p class="text-[10px] mt-4 font-bold text-white/40 tracking-[0.2em] uppercase">Simular Captura</p>
+              </div>
+              <div class="absolute top-0 left-0 w-full h-1 bg-theater-red shadow-[0_0_15px_#8B1E3F] scanning-line z-20"></div>
+            </div>
+          </div>
+          <button class="mt-12 flex items-center gap-2 bg-surface-container-highest hover:bg-outline-variant px-6 py-3 rounded-full transition-all border border-outline-variant group" id="btn-flashlight">
+            <span class="material-symbols-outlined text-theater-gold transition-transform group-hover:rotate-12" id="flashlight-icon">flashlight_on</span>
+            <span class="font-medium text-on-surface" id="flashlight-text">Encender linterna</span>
+          </button>
+          <p class="mt-12 text-on-surface-variant text-sm flex items-center gap-2 italic">
+            <span class="material-symbols-outlined text-[18px]">info</span>
+            Alinea el código QR dentro del marco para escanear automáticamente
+          </p>
+        </div>
+      </section>
+      <section class="flex-[2] flex flex-col gap-6 fade-in-up">
+        <div class="h-full bg-surface-container-high rounded-xl border border-outline-variant p-8 flex flex-col" id="ticket-result-panel">
+          <h3 class="text-theater-red font-bold text-xs uppercase tracking-[0.2em] mb-8">Último Ticket Escaneado</h3>
+          <div class="flex-1 flex flex-col items-center justify-center text-center p-6 space-y-4 opacity-60" id="scan-empty-state">
+            <span class="material-symbols-outlined text-[64px] text-on-surface-variant">qr_code_2</span>
+            <p class="font-body-lg">Esperando escaneo...</p>
+            <p class="text-sm text-on-surface-variant">Escanee una entrada para ver los detalles de validación aquí.</p>
+          </div>
+          <div class="hidden-section flex flex-col h-full" id="scan-details">
+            <!-- Badge dinámico: scanner.js lo actualiza según la respuesta de la API -->
+            <div id="scan-status-badge" class="border rounded-lg p-4 flex items-center gap-4 mb-6"></div>
+            <div class="space-y-8 flex-1">
+              <div>
+                <h4 class="font-display-lg text-3xl font-bold mb-1" id="res-name">—</h4>
+                <p class="text-theater-gold font-body-lg" id="res-show">—</p>
+              </div>
+              <div class="grid gap-5">
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Fecha</p>
+                    <p class="font-medium" id="res-date">—</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">chair_alt</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Asiento</p>
+                    <p class="font-medium" id="res-seat">—</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">stars</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Correo</p>
+                    <p class="font-medium text-theater-gold truncate" id="res-type">—</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="bg-surface-container w-10 h-10 rounded flex items-center justify-center border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant">barcode</span>
+                  </div>
+                  <div>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Código</p>
+                    <p class="font-label-sm text-sm" id="res-code">—</p>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-outline-variant mt-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-on-surface-variant text-sm">schedule</span>
+                    <span class="text-xs text-on-surface-variant font-label-sm uppercase">Escaneado a las: <span class="text-on-surface" id="res-time">—</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 grid grid-cols-2 gap-4">
+              <button class="action-btn flex items-center justify-center gap-2 bg-surface-container-highest border border-outline-variant hover:border-theater-gold hover:text-theater-gold py-3 rounded-lg transition-all active:scale-95" data-action="print">
+                <span class="material-symbols-outlined text-sm">print</span>
+                <span class="text-sm font-semibold">Imprimir</span>
+              </button>
+              <button class="action-btn flex items-center justify-center gap-2 bg-surface-container-highest border border-outline-variant hover:border-theater-gold hover:text-theater-gold py-3 rounded-lg transition-all active:scale-95" data-action="email">
+                <span class="material-symbols-outlined text-sm">mail</span>
+                <span class="text-sm font-semibold">Correo</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SECTION: VALIDACIONES -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface" id="section-validations">
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant p-8 h-full">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="font-headline-md text-2xl text-on-surface">Historial de Validaciones</h3>
+          <button class="bg-theater-red text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-800 transition-colors">Exportar Reporte</button>
+        </div>
+        <div class="overflow-auto max-h-[calc(100%-100px)]">
+          <table class="w-full text-left">
+            <thead class="border-b border-outline-variant">
+              <tr class="text-on-surface-variant text-xs uppercase tracking-widest font-bold">
+                <th class="pb-4">Ticket</th><th class="pb-4">Cliente</th><th class="pb-4">Hora</th><th class="pb-4">Estado</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/30 text-sm">
+              <tr class="hover:bg-surface-container-high/50 transition-colors">
+                <td class="py-4">#TRT-4521</td><td class="py-4 font-bold">Roberto Carlos</td><td class="py-4">19:30:12</td>
+                <td class="py-4"><span class="text-emerald-500 font-bold">Válido</span></td>
+              </tr>
+              <tr class="hover:bg-surface-container-high/50 transition-colors">
+                <td class="py-4">#TRT-4520</td><td class="py-4 font-bold">Ana Martínez</td><td class="py-4">19:28:45</td>
+                <td class="py-4"><span class="text-emerald-500 font-bold">Válido</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: ENTRADAS -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface flex items-center justify-center" id="section-tickets">
+      <div class="text-center space-y-6 max-w-md">
+        <span class="material-symbols-outlined text-[80px] text-theater-gold">confirmation_number</span>
+        <h3 class="font-display-lg text-3xl font-bold">Gestión de Entradas</h3>
+        <p class="text-on-surface-variant">Panel de administración de boletería en tiempo real. Esta sección está en mantenimiento.</p>
+      </div>
+    </div>
+
+    <!-- SECTION: HISTORIAL -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface" id="section-history">
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant p-8">
+        <h3 class="font-headline-md text-2xl text-on-surface mb-8">Sesiones de Hoy</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-surface-container-high p-6 rounded-lg border border-outline-variant">
+            <p class="text-xs text-on-surface-variant uppercase font-bold mb-2">Tickets Totales</p>
+            <p class="text-4xl font-display-lg font-bold text-theater-gold">1,245</p>
+          </div>
+          <div class="bg-surface-container-high p-6 rounded-lg border border-outline-variant">
+            <p class="text-xs text-on-surface-variant uppercase font-bold mb-2">Acceso VIP</p>
+            <p class="text-4xl font-display-lg font-bold text-emerald-500">312</p>
+          </div>
+          <div class="bg-surface-container-high p-6 rounded-lg border border-outline-variant">
+            <p class="text-xs text-on-surface-variant uppercase font-bold mb-2">No Válidos</p>
+            <p class="text-4xl font-display-lg font-bold text-theater-red">14</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: CONFIGURACIÓN -->
+    <div class="content-section hidden-section p-margin-desktop h-full bg-surface" id="section-settings">
+      <div class="max-w-2xl bg-surface-container-low rounded-xl border border-outline-variant p-8">
+        <h3 class="font-headline-md text-2xl text-on-surface mb-8">Configuración del Terminal</h3>
+        <div class="space-y-6">
+          <div class="flex items-center justify-between p-4 bg-surface-container rounded-lg">
+            <div>
+              <p class="font-bold">Modo de Escaneo Automático</p>
+              <p class="text-sm text-on-surface-variant">Validar inmediatamente sin confirmación manual</p>
+            </div>
+            <div class="w-12 h-6 bg-theater-red rounded-full relative cursor-pointer">
+              <div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-4 bg-surface-container rounded-lg">
+            <div>
+              <p class="font-bold">Sonido de Notificación</p>
+              <p class="text-sm text-on-surface-variant">Emitir pitido tras validación exitosa</p>
+            </div>
+            <div class="w-12 h-6 bg-outline-variant rounded-full relative cursor-pointer">
+              <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // SPA NAVIGATION
+    const navLinks  = document.querySelectorAll('.nav-link');
+    const sections  = document.querySelectorAll('.content-section');
+    const pageTitle = document.getElementById('page-title');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('data-section');
+            navLinks.forEach(nl => {
+                nl.classList.remove('active-nav-item','bg-theater-red','text-white');
+                nl.classList.add('text-on-surface-variant');
+            });
+            link.classList.add('active-nav-item');
+            link.classList.remove('text-on-surface-variant');
+            sections.forEach(s => { s.classList.add('hidden-section'); s.classList.remove('fade-in-up'); });
+            const target = document.getElementById(targetId);
+            target.classList.remove('hidden-section');
+            target.classList.add('fade-in-up');
+            pageTitle.innerText = link.querySelector('span:last-child').innerText.toUpperCase();
+        });
+    });
+
+    // SCANNER → manejado por scanner.js (window.onQrScanned / #simulate-scan click)
+
+    // FLASHLIGHT TOGGLE
+    const flashBtn  = document.getElementById('btn-flashlight');
+    const flashIcon = document.getElementById('flashlight-icon');
+    const flashText = document.getElementById('flashlight-text');
+    let flashOn = false;
+    flashBtn.addEventListener('click', () => {
+        flashOn = !flashOn;
+        flashIcon.innerText = flashOn ? 'flashlight_off' : 'flashlight_on';
+        flashText.innerText = flashOn ? 'Apagar linterna' : 'Encender linterna';
+        flashBtn.classList.toggle('bg-theater-gold', flashOn);
+        document.getElementById('qr-camera-view').classList.toggle('brightness-125', flashOn);
+    });
+
+    // ACTION BUTTONS
+    document.querySelectorAll('.action-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.getAttribute('data-action');
+            if (action === 'print') alert('Enviando a impresora de tickets...');
+            if (action === 'email') alert('Enviando comprobante digital al cliente...');
+        });
+    });
+
+    // Status pulse
+    setInterval(() => {
+        document.getElementById('status-dot').classList.toggle('bg-green-500');
+        document.getElementById('status-dot').classList.toggle('bg-green-400');
+    }, 1000);
+});
+</script>
+
+<script src="../js/scanner.js"></script>
+<script src="../js/dashboard-auth.js"></script>
 </body></html>
